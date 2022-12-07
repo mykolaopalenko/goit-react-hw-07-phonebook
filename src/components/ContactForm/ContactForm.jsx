@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from '../../redux/Contacts/contactsSelectors';
-import { addContact } from '../../redux/Contacts/contactsSlice';
+import { selectContacts  } from '../../redux/Contacts/contactsSelectors';
+import { addContact } from '../../redux/Contacts/contactsOperations';
 import {
   ContactFormStyle,
   ContantLabel,
@@ -16,7 +16,7 @@ const ContactForm = () => {
   const [number, setNumber] = useState('');
 
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts );
 
   const handlOnChange = e => {
     const { name, value } = e.currentTarget;
@@ -33,21 +33,21 @@ const ContactForm = () => {
   };
 
   const handleOnSubmit = e => {
-   e.preventDefault();
-   const normalizedName = name.toLowerCase();
+    e.preventDefault();
+    const normalizedName = name.toLowerCase();
 
-   if (contacts.find(({ name }) => name.toLowerCase() === normalizedName)) {
-     return toast.error(`${name} is already in contacts`);
-   }
-   const newContact = {
-     id: nanoid(),
-     name,
-     number,
-   };
-   dispatch(addContact(newContact));
+    if (contacts.find(({ name }) => name.toLowerCase() === normalizedName)) {
+      return toast.error(`${name} is already in contacts`);
+    }
+    const newContact = {
+      id: nanoid(),
+      name,
+      number,
+    };
+    dispatch(addContact(newContact));
 
-   reset();
- };
+    reset();
+  };
 
   const reset = () => {
     setName('');
@@ -89,6 +89,5 @@ const ContactForm = () => {
     </ContactFormStyle>
   );
 };
-
 
 export default ContactForm;

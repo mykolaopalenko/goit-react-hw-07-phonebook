@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getValueFilter } from '../../redux/Filters/filtersSelectors';
+import { selectValueFilter } from '../../redux/Filters/filtersSelectors';
 import { setValueFilters } from '../../redux/Filters/filtersSlice';
 import { nanoid } from 'nanoid';
 import {
@@ -12,7 +12,7 @@ import {
 
 const Filter = () => {
   const dispatch = useDispatch();
-  const value = useSelector(getValueFilter);
+  const value = useSelector(selectValueFilter);
 
   const onChange = e => {
     const value = e.target.value;

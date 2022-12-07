@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Avatar from 'react-avatar';
 import { useDispatch } from 'react-redux';
-import { removeContact } from '../../redux/Contacts/contactsSlice';
+import { deleteContact } from '../../redux/Contacts/contactsOperations';
 import {
   ContactName,
   ContactStyle,
@@ -21,7 +21,7 @@ const ContactItem = ({ name, number, id }) => {
       </ContactName>
       <DeleteBtn
         onClick={() => {
-          dispatch(removeContact(id));
+          dispatch(deleteContact(id));
         }}
         children="Delete"
         type="button"
